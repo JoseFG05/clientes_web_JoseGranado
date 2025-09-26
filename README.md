@@ -1,13 +1,11 @@
 <h1 align="center">Holaa!! mi nombre es Jose!</h1>
 <h3 align="center">Estudiante Ingenieria Computacion!!</h3>
 
-- 🔭 Trabajaremos con. **HTML**
+- 🔭 Trabajaremos con. **HTML, CSS,JAVASCRIPT**
 
 - 🌱 Actualmente estoy aprendiendo **programacion orientada a objetos,Lenguaje Clientes Web**
 
-- 👯 Aprenderemos... **JavaScript**
-
-- 🤝 Tambien trabajaremos con.. **JavaScript**
+- 🤝 Este es alguno de mis proyectos [Sistema de gestion de registros](https://github.com/JoseFG05/Proyect-Ini.git)
 
 - 👨‍💻 Todos mis proyectos en [https://github.com/JoseFG05](https://github.com/JoseFG05)
 
@@ -26,5 +24,6 @@
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=josefg05&show_icons=true&locale=en&layout=compact" alt="josefg05" /></p>
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=josefg05&show_icons=true&locale=en" alt="josefg05" /></p>
+
 
 
