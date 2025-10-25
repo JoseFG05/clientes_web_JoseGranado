@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header{
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0,1);
+
+}
+
+header h1{
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+section{
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0,1);
+
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+h3 {
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+
+.config-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.config-controls label{
+    font-weight: bold;
+
+}
+
+.config-controls select,.config-controls input{
+
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.config-controls button {
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.config-controls button:hover {
+    background: #2980b9;
+
+}
+
+.matrix-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.matrix-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.matrix-grid {
+    display: grid;
+    gap: 5px;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+.matrix-input-cell {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.matrix-input-cell:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.operation-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minamx(150px, 1fr));
+}
+
+.operation-btn {
+    padding: 12px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor:pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+
+}
+
+.operation-btn:hover{
+    background: #27ae60;
+    transform: translateY(-2px);
+}
+
+.operation-btn:active {
+    transform: translateY(0);
+}
+
+
+.scalar-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+}
+
+.scalar-input input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100px;
+}
+
+#apply-scalar {
+    padding: 8px 15px;
+    background: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.result-container {
+    min-height: 100px;
+    padding: 20px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.result-matrix {
+    display: inline-grid;
+    gap: 5px;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+}
+
+.result-cell {
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+.error {
+    color: #e74c3c;
+    background: #fadbd8;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #f5b7b1;
+}
+
+.success {
+    color: #27ae60;
+    background: #d5f4e6;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #a3e4d7;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .matrix-input {
+        flex-direction: column;
+    }
+    
+    .config-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .operation-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .operation-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .matrix-input-cell {
+        width: 50px;
+        height: 35px;
+        font-size: 14px;
+    }
+}

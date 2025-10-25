@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Matrices Interactiva</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+
+            <h1>Calculadora de Matrices Interactiva</h1>
+            <p>Realiza operaciones con matrices cuadradas 2x2 hasta 10x10</p>
+
+        </header>
+        <main>
+            <section class="matrix-config">
+                <h2>Configuracion de Matrices</h2>
+                <div class="config-controls">
+                    <label for="matrix-size">Tamano de matriz (nxn):</label>
+                    <select id="matrix-size">
+                        <option value="2">2x2</option>
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                        <option value="6">6x6</option>
+                        <option value="7">7x7</option>
+                        <option value="8">8x8</option>
+                        <option value="9">9x9</option>
+                        <option value="10">10x10</option>
+                    </select>
+                    <button id="generate-matrices">Generar Matrices</button>
+                    <button id="clear-matrices">Limpiar Matrices</button>
+                    <button id="random-matrices">Matrices Aleatorias</button>
+
+                        
+                </div>
+            </section>
+            <section class="matrix-input">
+                <div class="matrix-container">
+                    <h3>Matriz A</h3>
+                    <div id="matrix-a" class="matrix-grid"></div>
+                </div>
+                <div class="matrix-container">
+                    <h3>Matriz B</h3>
+                    <div id="matrix-b" class="matrix-grid"></div>
+                </div>
+            </section>
+            <section class="operations">
+                <h2>Operaciones</h2>
+                <div class="operation-buttons">
+                    <button class="operation-btn" data-operation="sum">A + B</button>
+                    <button class="operation-btn" data-operation="subtract">A - B</button>
+                    <button class="operation-btn" data-operation="multiply">A × B</button>
+                    <button class="operation-btn" data-operation="scalar">k × A</button>
+                    <button class="operation-btn" data-operation="transpose">A<sup>T</sup></button>
+                    <button class="operation-btn" data-operation="determinant">det(A)</button>
+                    <button class="operation-btn" data-operation="inverse">A<sup>-1</sup></button>
+                    <button class="operation-btn" data-operation="identity">I<sub>n</sub></button>
+                </div>
+            </section>
+            <section id="scalar-input" class="scalar-input hidden">
+                <label for="scalar-value">Valor escalar (k)</label>
+                <input type="number" id="scalar-value" step="any">
+                <button id="apply-scalar">Aplicar</button>
+            </section>
+
+            <section class="results">
+                <h2>Resultado</h2>
+                <div id="result-container" class="result-container">
+                    <div id="result-matrix" class="matrix-grid"></div>
+                    <div id="error-message" class="error hidden"></div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="operacion-matriz.js"></script>
+</body>
+<html>
