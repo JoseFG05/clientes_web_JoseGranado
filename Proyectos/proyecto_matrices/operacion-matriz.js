@@ -169,7 +169,7 @@ class MatrixCalculator {
                 case 'transpose':
                     this.matrixA = this.getMatrixValues('A');
                     this.validateMatrixFilled(this.matrixA, 'A');
-                    this.displayResult(this.matrixTranspose(this.matrixA));
+                    this.displayTransposeResult(this.matrixA);
                     break;
                 case 'determinant':
                     this.matrixA = this.getMatrixValues('A');
@@ -302,6 +302,62 @@ class MatrixCalculator {
 
         return result;
     }
+
+    // Mostrar matriz original y transpuesta simultáneamente
+displayTransposeResult(matrix) {
+    try {
+        this.clearResult();
+        
+        const originalContainer = document.getElementById('original-matrix-container');
+        const singleContainer = document.getElementById('single-result-container');
+        
+        // Calcular la transpuesta primero y verificar que funcione
+        const transposeResult = this.matrixTranspose(matrix);
+        
+        // Verificar que se calculó correctamente
+        if (!transposeResult || !Array.isArray(transposeResult)) {
+            throw new Error('Error al calcular la matriz transpuesta');
+        }
+        
+        // Ocultar contenedor único y mostrar comparación
+        singleContainer.style.display = 'none';
+        originalContainer.classList.remove('hidden');
+        
+        // Mostrar matriz original
+        const originalMatrixElement = document.getElementById('original-matrix');
+        const size = matrix.length;
+        
+        originalMatrixElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        originalMatrixElement.innerHTML = '';
+        
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                const cell = document.createElement('div');
+                cell.className = 'result-cell';
+                cell.textContent = this.formatNumber(matrix[i][j]);
+                originalMatrixElement.appendChild(cell);
+            }
+        }
+        
+        // Mostrar matriz transpuesta
+        const transposeMatrixElement = document.getElementById('transpose-result');
+        
+        transposeMatrixElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        transposeMatrixElement.innerHTML = '';
+        
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                const cell = document.createElement('div');
+                cell.className = 'result-cell';
+                cell.style.background = '#e8f4f8';
+                cell.textContent = this.formatNumber(transposeResult[i][j]);
+                transposeMatrixElement.appendChild(cell);
+            }
+        }
+    } catch (error) {
+        this.displayError('Error en transposición: ' + error.message);
+    }
+}
 
     // Determinante de matriz (método de eliminación gaussiana)
     matrixDeterminant(matrix) {
@@ -450,25 +506,32 @@ class MatrixCalculator {
 
     
 
-    // Mostrar resultado
-    displayResult(matrix) {
-        this.clearResult();
-        
-        const resultContainer = document.getElementById('result-matrix');
-        const size = matrix.length;
-        
-        resultContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-        resultContainer.className = 'result-matrix';
-        
-        for (let i = 0; i < size; i++) {
-            for (let j = 0; j < size; j++) {
-                const cell = document.createElement('div');
-                cell.className = 'result-cell';
-                cell.textContent = this.formatNumber(matrix[i][j]);
-                resultContainer.appendChild(cell);
-            }
+    // Mostrar resultado para operaciones normales
+displayResult(matrix) {
+    this.clearResult();
+    
+    const originalContainer = document.getElementById('original-matrix-container');
+    const singleContainer = document.getElementById('single-result-container');
+    const resultContainer = document.getElementById('result-matrix');
+    const size = matrix.length;
+    
+    // Ocultar comparación y mostrar contenedor único
+    originalContainer.classList.add('hidden');
+    singleContainer.style.display = 'block';
+    
+    resultContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    resultContainer.className = 'result-matrix';
+    resultContainer.innerHTML = '';
+    
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'result-cell';
+            cell.textContent = this.formatNumber(matrix[i][j]);
+            resultContainer.appendChild(cell);
         }
     }
+}
 
     // Mostrar determinante
     displayDeterminant(matrix) {
@@ -502,13 +565,17 @@ class MatrixCalculator {
         errorElement.classList.remove('hidden');
     }
 
-    // Limpiar resultados
-    clearResult() {
-        document.getElementById('result-matrix').innerHTML = '';
-        document.getElementById('error-message').classList.add('hidden');
-        document.getElementById('error-message').textContent = '';
-        document.getElementById('scalar-input').classList.add('hidden');
-    }
+   // Limpiar resultados
+clearResult() {
+    document.getElementById('result-matrix').innerHTML = '';
+    document.getElementById('original-matrix').innerHTML = '';
+    document.getElementById('transpose-result').innerHTML = '';
+    document.getElementById('error-message').classList.add('hidden');
+    document.getElementById('error-message').textContent = '';
+    document.getElementById('scalar-input').classList.add('hidden');
+    document.getElementById('original-matrix-container').classList.add('hidden');
+    document.getElementById('single-result-container').style.display = 'block';
+}
 }
 
 // Inicializar la calculadora cuando se carga la página

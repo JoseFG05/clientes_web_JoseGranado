@@ -66,14 +66,32 @@
                 <button id="apply-scalar">Aplicar</button>
             </section>
 
-            <section class="results">
-                <h2>Resultado</h2>
-                <div id="result-container" class="result-container">
-                    <div id="result-matrix" class="matrix-grid"></div>
-                    <div id="error-message" class="error hidden"></div>
 
-                </div>
-            </section>
+            <!-- Sección de resultados -->
+<section class="results">
+    <h2>Resultado</h2>
+    <div id="result-container" class="result-container">
+        <!-- Contenedor para transpuesta (matriz original y transpuesta) -->
+        <div id="original-matrix-container" class="matrix-comparison hidden">
+            <div class="matrix-pair">
+                <h3>Matriz Original</h3>
+                <div id="original-matrix" class="matrix-grid"></div>
+            </div>
+            <div class="matrix-pair">
+                <h3>Matriz Transpuesta</h3>
+                <div id="transpose-result" class="matrix-grid"></div>
+            </div>
+        </div>
+        
+        <!-- Contenedor para resultados normales (una sola matriz) -->
+        <div id="single-result-container">
+            <div id="result-matrix" class="matrix-grid"></div>
+        </div>
+        
+        <div id="error-message" class="error hidden"></div>
+    </div>
+</section>
+
         </main>
     </div>
     <script src="operacion-matriz.js"></script>

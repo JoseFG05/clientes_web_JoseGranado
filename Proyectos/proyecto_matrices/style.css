@@ -230,6 +230,52 @@ h3 {
 }
 
 
+
+.matrix-comparison{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.matrix-pair{
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+}
+
+.matrix-pair h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+
+#single-result-container {
+    text-align: center;
+}
+
+.result-cell{
+    width: 60px;
+     height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+.operation-indicator {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin:10px 0;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
