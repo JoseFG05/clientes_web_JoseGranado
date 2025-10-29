@@ -7,7 +7,11 @@ class MatrixCalculator {
         this.resultMatrix = [];
         
         this.initializeEventListeners();
+        this.initializeExamples();
         this.generateMatrixInputs(this.currentSize);
+
+        
+
     }
 
     
@@ -93,6 +97,29 @@ class MatrixCalculator {
 
         return matrix;
     }
+
+    //Establece valores en una matriz
+    setMatrixValues(matrixName, matrix) {
+    console.log('setMatrixValues llamado para:', matrixName, matrix);
+    
+    const inputs = document.querySelectorAll(`.matrix-input-cell[data-matrix="${matrixName}"]`);
+    const size = matrix.length;
+
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            const input = document.querySelector(`.matrix-input-cell[data-matrix="${matrixName}"][data-row="${i}"][data-col="${j}"]`);
+            if (input) {
+                input.value = matrix[i][j];
+            } else {
+                console.error('Input no encontrado:', matrixName, i, j);
+            }
+        }
+    }
+    
+    console.log('setMatrixValues completado');
+}
+
+
 
     // Validar que una matriz esté completamente llena
     validateMatrixFilled(matrix, matrixName) {
@@ -576,6 +603,206 @@ clearResult() {
     document.getElementById('original-matrix-container').classList.add('hidden');
     document.getElementById('single-result-container').style.display = 'block';
 }
+
+// Inicializar carga de ejemplos
+initializeExamples() {
+    const loadExamplesBtn = document.getElementById('load-examples');
+    
+    if (loadExamplesBtn) {
+        loadExamplesBtn.addEventListener('click', () => {
+            this.showExamplesMenu();
+        });
+    } else {
+        console.error('Botón load-examples no encontrado');
+    }
+}
+
+// Mostrar menú de ejemplos
+showExamplesMenu() {
+    // Crear menú directamente sin verificar si existe
+    this.createExamplesMenu();
+}
+
+// Crear menú de ejemplos
+createExamplesMenu() {
+    // Crear contenedor del menú
+    const menu = document.createElement('div');
+    menu.id = 'examples-menu';
+    menu.className = 'examples-menu show';
+    menu.innerHTML = `
+        <button class="example-option" data-example="identity-3">Matriz Identidad 3×3</button>
+        <button class="example-option" data-example="invertible-2">Matriz Invertible 2×2</button>
+        <button class="example-option" data-example="singular-2">Matriz Singular 2×2</button>
+        <button class="example-option" data-example="symmetric-3">Matriz Simétrica 3×3</button>
+        <button class="example-option" data-example="diagonal-3">Matriz Diagonal 3×3</button>
+        <button class="example-option" data-example="multiplication-test">Prueba Multiplicación</button>
+        <button class="example-option" data-example="determinant-test">Prueba Determinante</button>
+    `;
+
+    // Posicionar el menú debajo del botón
+    const loadExamplesBtn = document.getElementById('load-examples');
+    const rect = loadExamplesBtn.getBoundingClientRect();
+    menu.style.position = 'absolute';
+    menu.style.left = rect.left + 'px';
+    menu.style.top = (rect.bottom + 5) + 'px';
+
+    // Agregar al documento
+    document.body.appendChild(menu);
+
+    // Agregar event listeners
+    menu.querySelectorAll('.example-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            const exampleType = e.target.dataset.example;
+            this.loadExample(exampleType);
+            this.hideExamplesMenu();
+        });
+    });
+
+    // Cerrar menú al hacer clic fuera
+    setTimeout(() => {
+        document.addEventListener('click', this.closeMenuOnClickOutside.bind(this));
+    }, 100);
+}
+
+// Cerrar menú al hacer clic fuera
+closeMenuOnClickOutside(e) {
+    const menu = document.getElementById('examples-menu');
+    const loadExamplesBtn = document.getElementById('load-examples');
+    
+    if (menu && !menu.contains(e.target) && e.target !== loadExamplesBtn) {
+        this.hideExamplesMenu();
+    }
+}
+
+// Ocultar menú de ejemplos
+hideExamplesMenu() {
+    const menu = document.getElementById('examples-menu');
+    if (menu) {
+        menu.remove();
+        document.removeEventListener('click', this.closeMenuOnClickOutside);
+    }
+}
+
+// Cargar ejemplo específico
+loadExample(exampleType) {
+    console.log('Intentando cargar ejemplo:', exampleType); // Debug
+    
+    try {
+        this.clearMatrices();
+        this.clearResult();
+
+        let matrixA = [];
+        let matrixB = [];
+
+        console.log('Tipo de ejemplo:', exampleType); // Debug
+
+        switch (exampleType) {
+            case 'identity-3':
+                console.log('Cargando identidad 3x3'); // Debug
+                this.currentSize = 3;
+                this.generateMatrixInputs(3);
+                matrixA = this.matrixIdentity(3);
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            case 'invertible-2':
+                console.log('Cargando invertible 2x2'); // Debug
+                this.currentSize = 2;
+                this.generateMatrixInputs(2);
+                matrixA = [[2, 1], [1, 2]]; // det = 3
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            case 'singular-2':
+                console.log('Cargando singular 2x2'); // Debug
+                this.currentSize = 2;
+                this.generateMatrixInputs(2);
+                matrixA = [[1, 2], [2, 4]]; // det = 0
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            case 'symmetric-3':
+                console.log('Cargando simétrica 3x3'); // Debug
+                this.currentSize = 3;
+                this.generateMatrixInputs(3);
+                matrixA = [[1, 2, 3], [2, 4, 5], [3, 5, 6]];
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            case 'diagonal-3':
+                console.log('Cargando diagonal 3x3'); // Debug
+                this.currentSize = 3;
+                this.generateMatrixInputs(3);
+                matrixA = [[2, 0, 0], [0, 3, 0], [0, 0, 4]];
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            case 'multiplication-test':
+                console.log('Cargando multiplicación test'); // Debug
+                this.currentSize = 2;
+                this.generateMatrixInputs(2);
+                matrixA = [[1, 2], [3, 4]];
+                matrixB = [[2, 0], [1, 2]];
+                this.setMatrixValues('A', matrixA);
+                this.setMatrixValues('B', matrixB);
+                break;
+
+            case 'determinant-test':
+                console.log('Cargando determinante test'); // Debug
+                this.currentSize = 3;
+                this.generateMatrixInputs(3);
+                matrixA = [[1, 2, 3], [0, 1, 4], [5, 6, 0]]; // det = 1
+                this.setMatrixValues('A', matrixA);
+                break;
+
+            default:
+                console.log('Ejemplo no reconocido:', exampleType); // Debug
+                throw new Error('Tipo de ejemplo no reconocido');
+        }
+
+        // Actualizar selector de tamaño
+        document.getElementById('matrix-size').value = this.currentSize;
+
+        // Mostrar mensaje de éxito
+        console.log('Ejemplo cargado exitosamente'); // Debug
+        this.displaySuccess(`Ejemplo "${this.getExampleName(exampleType)}" cargado correctamente`);
+
+    } catch (error) {
+        console.error('Error al cargar ejemplo:', error); // Debug
+        this.displayError('Error al cargar el ejemplo: ' + error.message);
+    }
+}
+
+// Obtener nombre  del ejemplo
+getExampleName(exampleType) {
+    const names = {
+        'identity-3': 'Matriz Identidad 3x3',
+        'invertible-2': 'Matriz Invertible 2x2',
+        'singular-2': 'Matriz Singular 2x2',
+        'symmetric-3': 'Matriz Simétrica 3x3',
+        'diagonal-3': 'Matriz Diagonal 3x3',
+        'multiplication-test': 'Prueba de Multiplicación',
+        'determinant-test': 'Prueba de Determinante'
+    };
+    return names[exampleType] || 'Ejemplo';
+}
+
+// Mostrar mensaje de éxito
+displaySuccess(message) {
+    this.clearResult();
+    
+    const resultContainer = document.getElementById('result-matrix');
+    resultContainer.innerHTML = `
+        <div class="success">
+            <strong>${message}</strong>
+        </div>
+    `;
+}
+
+    
+
+    
+
 }
 
 // Inicializar la calculadora cuando se carga la página
