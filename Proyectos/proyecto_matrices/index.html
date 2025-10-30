@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="container">
+       
+       <!--Titulo-->
         <header>
 
             <h1>Calculadora de Matrices Interactiva</h1>
@@ -15,6 +17,8 @@
 
         </header>
         <main>
+           
+           <!--seccion configuracion-->
             <section class="matrix-config">
                 <h2>Configuracion de Matrices</h2>
                 <div class="config-controls">
@@ -38,6 +42,8 @@
                         
                 </div>
             </section>
+           
+           <!--seccion entrada de matrices-->
             <section class="matrix-input">
                 <div class="matrix-container">
                     <h3>Matriz A</h3>
@@ -48,6 +54,8 @@
                     <div id="matrix-b" class="matrix-grid"></div>
                 </div>
             </section>
+           
+           <!--seccion operaciones-->
             <section class="operations">
                 <h2>Operaciones</h2>
                 <div class="operation-buttons">
@@ -61,6 +69,8 @@
                     <button class="operation-btn" data-operation="identity">I<sub>n</sub></button>
                 </div>
             </section>
+           
+           <!--entrada para escalar-->
             <section id="scalar-input" class="scalar-input hidden">
                 <label for="scalar-value">Valor escalar (k)</label>
                 <input type="number" id="scalar-value" step="any">

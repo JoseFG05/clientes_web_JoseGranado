@@ -1,4 +1,4 @@
- 
+//Modulo principal de la calculadora  
 class MatrixCalculator {
     constructor() {
         this.currentSize = 3;
@@ -14,9 +14,11 @@ class MatrixCalculator {
 
     }
 
-    
+    //Inicializar event listeners
     initializeEventListeners() {
+       
         // Configuración de tamaño
+       
         document.getElementById('matrix-size').addEventListener('change', (e) => {
             this.currentSize = parseInt(e.target.value);
             this.generateMatrixInputs(this.currentSize);
@@ -315,7 +317,7 @@ class MatrixCalculator {
         return result;
     }
 
-
+//Tansposicion de una matriz (transpuesta)
     matrixTranspose(matrix) {
         const result = [];
         const size = matrix.length;
@@ -453,6 +455,7 @@ displayTransposeResult(matrix) {
         
         // Aplicar eliminación gaussiana
         for (let i = 0; i < size; i++) {
+           
             // Hacer 1 en la diagonal
             const pivot = augmented[i][i];
             for (let j = 0; j < 2 * size; j++) {
@@ -625,16 +628,17 @@ showExamplesMenu() {
 
 // Crear menú de ejemplos
 createExamplesMenu() {
+    
     // Crear contenedor del menú
     const menu = document.createElement('div');
     menu.id = 'examples-menu';
     menu.className = 'examples-menu show';
     menu.innerHTML = `
-        <button class="example-option" data-example="identity-3">Matriz Identidad 3×3</button>
-        <button class="example-option" data-example="invertible-2">Matriz Invertible 2×2</button>
-        <button class="example-option" data-example="singular-2">Matriz Singular 2×2</button>
-        <button class="example-option" data-example="symmetric-3">Matriz Simétrica 3×3</button>
-        <button class="example-option" data-example="diagonal-3">Matriz Diagonal 3×3</button>
+        <button class="example-option" data-example="identity-3">Matriz Identidad 3x3</button>
+        <button class="example-option" data-example="invertible-2">Matriz Invertible 2x2</button>
+        <button class="example-option" data-example="singular-2">Matriz Singular 2x2</button>
+        <button class="example-option" data-example="symmetric-3">Matriz Simétrica 3x3</button>
+        <button class="example-option" data-example="diagonal-3">Matriz Diagonal 3x3</button>
         <button class="example-option" data-example="multiplication-test">Prueba Multiplicación</button>
         <button class="example-option" data-example="determinant-test">Prueba Determinante</button>
     `;
@@ -658,7 +662,7 @@ createExamplesMenu() {
         });
     });
 
-    // Cerrar menú al hacer clic fuera
+    
     setTimeout(() => {
         document.addEventListener('click', this.closeMenuOnClickOutside.bind(this));
     }, 100);
