@@ -3,135 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego Trivia</title>
+    <title>Trivia Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        </div id= "setup-screen" class= "screen active">
-        <h1>Juego Trivia</h1>
-        <p class="subtitle">Pon a prueba lo quen sabes</p>
-        <form id="game-setup">
-            <div class="form-group">
-                <label for="player-name">Nombre del jugador
-                    
-                </label>
-                <input type="text" id="player-name" placeholder="Ingresa tu nombre" required>
-                <div id="name-error" class="error">El nombre debe tener de 2 a 20 caracteres</div>
+        <!-- Página de inicio -->
+        <div id="home" class="flex-center flex-column">
+            <h1>Trivia</h1>
+            <a class="btn" href="#" id="startGameBtn">Play</a>
+            <a class="btn" href="#" id="highScoresBtn">High Scores</a>
+        </div>
 
+        <!-- Página de configuración -->
+        <div id="config" class="flex-center flex-column hidden">
+            <h2>Configuración del Juego</h2>
+            <input type="text" id="playerName" placeholder="Nombre del jugador" maxlength="20" required>
+            <input type="number" id="numQuestions" placeholder="Cantidad de preguntas (5-20)" min="5" max="20" required>
+            <select id="difficulty">
+                <option value="easy">Fácil</option>
+                <option value="medium">Medio</option>
+                <option value="hard">Difícil</option>
+            </select>
+            <select id="category">
+                <option value="any">Mixta</option>
+                <option value="9">General Knowledge</option>
+                <option value="17">Science: Computers</option>
+                <option value="21">Sports</option>
+                <option value="18">Science: Gadgets</option>
+                <option value="22">Geography</option>
+            </select>
+            <a class="btn" href="#" id="startTriviaBtn">Iniciar Trivia</a>
+        </div>
 
-            </div>
-            <div class="form-group">
-                <label for="question-count">Cantidad de preguntas:</label>
-                <input type="number" id="question-count" min="5" max="20" value="10" requierd>
-                <div id="count-error" class="error">Debe seleccionar entre 5 a 20 preguntas</div>
-
-            </div>
-            <div class="form-group">
-                <label for="difficulty">Nivel de dificultad:</label>
-                <select id="difficulty" required>
-                    <option value="">Selecciona una dificultad</option>
-                    <option value="easy">Facil</option>
-                    
-                    <option value="medium">Medio</option>
-                    <option value="hard">Dificil</option>
-
-                </select>
-
-            </div>
-            <div class="form-group">
-                <label for="category">Categoria:</label>
-                <select id="category" required>
-                    <option value="">Selecciona una Categoria
-
-                    </option>
-                    <option value="0">Mixtas (todas las categorias)</option>
-                    <option value="9">Conocimientos generales</option>
-                    <option value="10">Entretenimiento: libros</option>
-                    <option value="11">Entretenimiento:cine</option>
-                    <option value="12">Entretenimeinto:musica</option>
-                    <option value="17">Ciencia y Naturaleza</option>
-                    <option value="18">Ciencia: Computadoras</option>
-                    <option value="21">Deportes:</option>
-                    <option value="22">Geografia</option>
-                    <option value="Historia"></option>
-
-                </select>
-            </div>
-            <button type="submit" class="btn btn-block">Comenzar Juego</button>
-        </form>
-
-        <div id="loading-screen" class="screen">
-            <div class="loader">
-                <div class="spinner"></div>
-                <h2>Cargando preguntas...</h2>
-                <p>Por favor espera mientras preparamos tu trivia</p>
-
+        <!-- Página del juego -->
+        <div id="game" class="flex-center flex-column hidden">
+            <h2 id="questionText"></h2>
+            <div id="optionsContainer"></div>
+            <div id="progressContainer">
+                <p id="questionNumber">Pregunta 1 de 10</p>
+                <p id="timer">Tiempo: 20</p>
             </div>
         </div>
 
-        <div id="game-screen" class="screen">
-            <div class="game-header">
-                <div class="player-info" id="player-display">Jugador:</div>
-                <div class="score-info" id="score-display">Puntuacion:0</div>
-
-            </div>
-            <div class="question-counter"id=question-counter>Pregunta 1 de 10</div>
-            <div class="timer-container">
-                <div class="timer">
-                    <div class="timer-bar"id=timer-bar></div>\
-
-                </div>
-                <div class="timer-text" id="timer-text"> 20 segundos</div>
-
-            </div>
-            <div class="question-text" id="question-text"></div>
-            <div class="options-container" id="options-container"></div>
-            <div class="feedback" id="feedback"></div>
-            <button id="next-btn" class="btn btn-block" style="display: none;">Siguiente Pregunta</button>
-
+        <!-- Pantalla de resultados -->
+        <div id="results" class="flex-center flex-column hidden">
+            <h2>Resultados</h2>
+            <p id="finalScore">Puntuación: 0</p>
+            <p id="correctAnswers">Respuestas correctas: 0/10</p>
+            <p id="accuracy">Porcentaje: 0%</p>
+            <p id="averageTime">Tiempo promedio: 0 segundos</p>
+            <a class="btn" href="#" id="restartBtn">Nuevo Juego</a>
+            <a class="btn" href="#" id="changeConfigBtn">Cambiar configuración</a>
+            <a class="btn" href="#" id="exitBtn">Salir</a>
         </div>
-
-        <div id="results-screen" class="screen">
-            <h1>Resultados Finales</h1>
-
-            <div class="result-container">
-                <h2 id="final-player">Felicidades, Jugador!</h2>
-                <div class="score-display" id="final-score">0</div>
-                <div class="percentage" id="percentage">0%
-                </div>
-
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-value" id="correct-answers">0</div>
-                        <div class="stat-label">Respuestas correctas</div>
-
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="incorrect-answers">0</div>
-                        <div class="stat-label">Respuestas incorrectas</div>
-
-
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value"id=total-questions>0</div>
-                        <div class="stat-label">Total de preguntas</div>
-
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="avg-time">0s</div>
-                        <div class="stat-label">Tiempo promedio</div>
-                    </div>
-                </div>
-                <div class="btn-container">
-                    <button id="play-again-btn" class="btn btn-success">Jugar Otra vez</button>
-                    <button id="change-settings-btn" class="btn">Cambiar configuracion</button>
-                    <button id="finish-btn" class="btn btn-danger">Finalizar</button>
-                </div>
-            
-            </div>
-        </div>
-        <script src="trivia.js"></script>
+    </div>
     
+    <script src="script.js"></script>
 </body>
 </html>
